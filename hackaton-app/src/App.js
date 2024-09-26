@@ -15,6 +15,7 @@ import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import { AuthProvider } from "./context/AuthContext";
 import { FaMessage } from "react-icons/fa6";
+import AdminTable from "./pages/AdminTable";
 const BubbleButton = () => {
   const navigate = useNavigate();
 
@@ -43,6 +44,7 @@ function App() {
               <Route path="/booking" element={<BookingPage />} />
               <Route path="/home" element={<HomePage />} />
               <Route path="/booking-display" element={<BookingDisplay />} />
+              <Route path="/a_table" element={<AdminTable />} />
             </Routes>
           </div>
           <Footer />
