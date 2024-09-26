@@ -33,6 +33,7 @@ const Navbar = () => {
     handleMenuClose();
     logout();
     navigate("/");
+    handleMenuClose();
   };
 
   const toggleDrawer = (open) => (event) => {
