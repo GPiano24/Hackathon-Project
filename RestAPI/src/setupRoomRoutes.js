@@ -1,4 +1,3 @@
-import connection  from '../database/dbConnection.js';
 import { getRoom, getRooms }  from '../functions/roomFunctions.js';
 
 const API_URL = 'http://localhost:4000';
