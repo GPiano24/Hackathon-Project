@@ -31,14 +31,14 @@ const typeDefs = gql`
     type Room {
         id: ID
         name: String
-        capacity: Integer
+        capacity: Int
     }
     
     type Booking{
         id: ID
         users: [User]
         rooms: [Room]
-        approved_ind: Integer
+        approved_ind: Int
         booking_reason: String
         from_booking: String
         to_booking: String

@@ -16,7 +16,18 @@ const Query = {
         return data;
     },
 
-    =
+    bookings: async(parent,args,context,info) => {
+        const {id} = args;
+        const response = await fetch(`${API_URL}bookings/${id}`);
+        const data = await response.json();
+        return data;
+    },
+
+    bookings: async(parent,args,context,info) => {
+        const response = await fetch(`${API_URL}bookings`);
+        const data = await response.json();
+        return data;
+    },
 }
 
 module.exports = {Query};
