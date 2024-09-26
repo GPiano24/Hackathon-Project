@@ -32,6 +32,7 @@ const typeDefs = gql`
         id: ID
         name: String
         capacity: Int
+        status: String
     }
     
     type Booking{
