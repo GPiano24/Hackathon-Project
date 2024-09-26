@@ -11,7 +11,7 @@ const AuthPage = () => {
   const [error, setError] = useState('')
   
 
-  //const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const onButtonClick = () => {
     setError("")
@@ -23,7 +23,7 @@ const AuthPage = () => {
 
     //Authentication calls here
     //Successful login
-    //navigate('/');
+    navigate('/');
   }
 
   const handleInputChange = (setter) => (event) => {
