@@ -28,8 +28,9 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    handleMenuClose();
+    localStorage.removeItem("token");
     navigate("/");
+    handleMenuClose();
   };
 
   const toggleDrawer = (open) => (event) => {

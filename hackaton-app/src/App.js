@@ -14,6 +14,8 @@ import AdminBookingPage from "./pages/AdminBookingPage";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import { FaMessage } from "react-icons/fa6";
+import { ProtectedRoute, PublicRoute } from "./routes";
+
 const BubbleButton = () => {
   const navigate = useNavigate();
 
@@ -34,13 +36,54 @@ function App() {
         <NavBar />
         <div className="flex-grow">
           <Routes>
-            <Route path="/" element={<AuthPage />} />
-            <Route path="/contact" element={<ContactUsPage />} />
-            <Route path="/a_booking" element={<AdminBookingPage />} />
-            <Route path="/booking" element={<BookingPage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/booking-display" element={<BookingDisplay />} />
-            <Route path="/contact-us" element={<ContactUsPage />} />
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <AuthPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/a_booking"
+              element={
+                <ProtectedRoute adminOnly={true}>
+                  <AdminBookingPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/booking"
+              element={
+                <ProtectedRoute>
+                  <BookingPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <HomePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/booking-display"
+              element={
+                <ProtectedRoute>
+                  <BookingDisplay />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/contact-us"
+              element={
+                <ProtectedRoute>
+                  <ContactUsPage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
         <Footer />

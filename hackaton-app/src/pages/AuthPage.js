@@ -1,76 +1,51 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import logo from "../assets/logo.png";
 import background from "../assets/bg-mu.png";
 
 const AuthPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const onButtonClick = () => {
-    setError("");
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-    if (username === "" || password === "") {
-      setError("Missing Fields");
-      return;
+    try {
+      const response = await fetch("http://localhost:3001/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+
+      console.log("response", response);
+
+      if (!response.ok) {
+        throw new Error("Invalid credentials");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.accessToken);
+
+      const decodedToken = jwtDecode(data.accessToken);
+      const userRole = decodedToken.role;
+
+      if (userRole === "admin") {
+        navigate("/a_booking");
+      } else {
+        navigate("/home");
+      }
+    } catch (error) {
+      setErrorMessage("Invalid credentials. Please try again.");
     }
-
-    //Authentication calls here
-    //Successful login
-    navigate("/home");
   };
-
-  const handleInputChange = (setter) => (event) => {
-    setter(event.target.value);
-    setError(""); // Clears the error
-  };
-
-  // return (
-  //   <div className={"main-container"}>
-  //     <div className={"inner-container"}>
-  //       <img src={logo} alt="Manulife Logo"/>
-
-  //       <br/>
-
-  //       <div className={'input-container'}>
-  //         <p>Username</p>
-  //         <input
-  //             value={username}
-  //             onChange={(ev) => setUsername(ev.target.value)}
-  //             className={'inputBox'}
-  //         />
-  //       </div>
-
-  //       <br/>
-
-  //       <div className={'input-container'}>
-  //         <p>Password</p>
-  //         <input
-  //             value={password}
-  //             onChange={(ev) => setPassword(ev.target.value)}
-  //             className={'inputBox'}
-  //         />
-  //       </div>
-
-  //       <br/>
-
-  //       <div>
-  //         <label className={"errorLabel"}>{error}</label>
-  //       </div>
-
-  //       <br/>
-
-  //       <div className={'button-container'}>
-  //         <input className={'inputButton'} type="button" onClick={onButtonClick} value={'LOGIN'} />
-  //       </div>
-
-  //     </div>
-  //   </div>
-  // );
 
   return (
     <div className="relative flex flex-col items-center justify-center h-screen">
@@ -79,43 +54,44 @@ const AuthPage = () => {
         style={{ backgroundImage: `url(${background})` }}
       />
 
-      <div className="relative flex flex-col items-center justify-center h-3/5 w-1/3 bg-white rounded-2xl p-6 shadow-lg">
+      <form
+        onSubmit={handleLogin}
+        className="relative flex flex-col items-center justify-center h-3/5 w-1/3 bg-white rounded-2xl p-6 shadow-lg"
+      >
         <img src={logo} alt="Manulife Logo" className="mb-6" />
-
         <div className="w-2/3 flex flex-col items-start justify-center mb-4">
           <p className="text-base">Username</p>
           <input
             value={username}
-            onChange={handleInputChange(setUsername)}
+            onChange={(e) => setUsername(e.target.value)}
+            required
             className="h-12 w-full text-base rounded-md border border-black pl-2"
           />
         </div>
-
         <div className="w-2/3 flex flex-col items-start justify-center mb-4">
           <p className="text-base">Password</p>
           <input
             value={password}
             type="password"
-            onChange={handleInputChange(setPassword)}
+            onChange={(e) => setPassword(e.target.value)}
             className="h-12 w-full text-base rounded-md border border-black pl-2"
+            required
           />
         </div>
-
-        {error && (
-          <div>
-            <label className="text-red-500 text-sm">{error}</label>
-          </div>
-        )}
-
         <div className="w-3/5 mt-4">
           <button
             className="w-full bg-gray-800 text-white py-3 rounded-md text-xl hover:bg-gray-700"
-            onClick={onButtonClick}
+            type="submit"
           >
             LOGIN
           </button>
         </div>
-      </div>
+        {errorMessage && (
+          <div>
+            <label className="text-red-500 text-sm">{errorMessage}</label>
+          </div>
+        )}
+      </form>
     </div>
   );
 };
