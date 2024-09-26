@@ -12,14 +12,9 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/rooms", (req, res) => {
-    const s = req.query.status; 
     const c = req.query.capacity;
     
     let rooms = data.rooms;
-
-    if(s){
-        rooms = data.rooms.filter(room => room.status.toLowerCase() === s);
-    }
 
     if(c){
         rooms = data.rooms.filter(room => room.capacity === c);
