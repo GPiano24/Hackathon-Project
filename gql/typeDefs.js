@@ -37,8 +37,8 @@ const typeDefs = gql`
     
     type Booking{
         id: ID
-        users: [User]
-        rooms: [Room]
+        userID: String
+        roomID: String
         approved_ind: Int
         booking_reason: String
         from_booking: String
