@@ -1,3 +1,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 
+@layer components{
+    .form-container {
+        @apply relative w-[45%] bg-[#f9f9f9] mx-auto my-5 p-5 rounded-lg border-2 border-solid border-[#ccc];
+      }
+      .labels {
+        @apply text-[black];
+      }
+      .form {
+        @apply flex flex-col;
+      }
+      .input,
+      .select,
+      .textarea {
+        @apply border w-full box-border shadow-[0_4px_6px_rgba(0,0,0,0.1)] transition-shadow duration-[0.3s] ease-[ease] text-black mx-0 my-2.5 p-2.5 rounded-[20px] border-solid border-[#ccc];
+      }
+      .input:hover,
+      .select:hover,
+      .textarea:hover {
+        @apply shadow-[0_6px_8px_rgba(0,0,0,0.15)];
+      }
+      .input:focus,
+      .select:focus,
+      .textarea:focus {
+        @apply shadow-[0_0_8px_rgba(66,153,225,0.5)];
+        outline: none;
+      }
+      .button {
+        @apply bg-[#2c2c2c] text-white cursor-pointer w-full mt-[15px] p-3 rounded-[20px] border-[none];
+      }
+      .Header {
+        @apply text-[8vw] font-[bold] text-center mb-5;
+      }
+      .time-container {
+        @apply flex justify-between mx-0 my-2.5;
+      }
+      .time-container div {
+        @apply flex-1 mr-2.5 last:mr-0;
+      }
+      .cancel-button {
+        @apply relative text-[1vw] cursor-pointer text-[white] w-1/5 mb-5 rounded-[20px] border-[none] left-[80%];
+        background: #ff4d4d;
+      }
+      .cancel-button:hover {
+        background: #ff0000;
+      }
+
+} */
+
+  

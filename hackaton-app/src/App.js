@@ -5,6 +5,7 @@ import "./App.css";
 
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
+import BookingPage from "./pages/BookingPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import AdminBookingPage from "./pages/AdminBookingPage";
 
@@ -18,7 +19,7 @@ function App() {
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/contact" element={<ContactUsPage />} />
             <Route path="/a_booking" element={<AdminBookingPage />} />
-            <Route path="/booking" element={<AdminBookingPage />} />
+            <Route path="/booking" element={<BookingPage />} />
             <Route path="/home" element={<HomePage />} />
           </Routes>
         </header>

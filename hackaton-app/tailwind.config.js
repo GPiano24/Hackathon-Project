@@ -1,8 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: ["./src/pages/BookingPage.js"],
   theme: {
     extend: {},
+
+    
   },
   plugins: [],
 }

@@ -1,0 +1,92 @@
+.form-container {
+    position: relative;  
+    border: 2px solid #ccc;  
+    padding: 20px;          
+    border-radius: 8px;    
+    width: 45%;                   
+    margin: 20px auto;      
+    background-color: #f9f9f9; 
+  }
+
+.labels{
+    color: black;
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input, .select, .textarea {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+    transition: box-shadow 0.3s ease; 
+    color: #000;
+  }
+  
+  
+  
+  .input:hover, .select:hover, .textarea:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);  
+  }
+  
+  .input:focus, .select:focus, .textarea:focus {
+    outline: none; 
+    box-shadow: 0 0 8px rgba(66, 153, 225, 0.5); 
+  }
+  .button {
+    padding: 12px;
+    background-color: #2c2c2c;
+    color: #fff;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  .Header {
+    font-size: 8vw;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+
+  .time-container {
+    display: flex;              
+    justify-content: space-between; 
+    margin: 10px 0;          
+  }
+  
+  .time-container div {
+    flex: 1;                  
+    margin-right: 10px;      
+  }
+  
+  .time-container div:last-child {
+    margin-right: 0;         
+  }
+
+.cancel-button {
+    position: relative;
+    left: 80%;
+    margin-bottom: 20px;
+    background: #ff4d4d;
+    border: none;
+    font-size: 1vw;
+    cursor: pointer;
+    color: white;
+    width: 20%;
+    border-radius: 20px;
+  }
+  
+  .cancel-button:hover {
+    background: #ff0000
+  }
