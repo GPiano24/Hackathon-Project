@@ -3,6 +3,20 @@ USE MU_CENTRALIZED_SCHEDULING;
 INSERT INTO USERS (user_id, username, password, first_name, middle_name, last_name)
      VALUES
      ('510645', 'vicenv', 'M@nul!fe', 'Vhea', 'Perey', 'Vicente');
+     ('000045', 'johndoe', 'password1', 'John', 'Some', 'Doe');
+     ('111111', 'jane', 'password2', 'Jane', 'Any', 'Doe');
+
+INSERT INTO ROLES (role_id, role_name, role_description)
+    VALUES
+    ('01', 'student', 'something about student'),
+    ('02', 'teacher', 'something about teacher');
+    ('03', 'admin', 'something about admin');
+
+INSERT INTO USER_ROLES (user_id, role_id)
+    VALUES
+    ('510645', '01');
+    ('000045', '03');
+    ('111111', '02');
      
 INSERT INTO ROOMS (room_id, room_name, capacity)
     VALUES
