@@ -10,20 +10,24 @@ import AdminBookingPage from "./pages/AdminBookingPage";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <header className="App-header">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path="/contact" element={<ContactUsPage />} />
-            <Route path="/a_booking" element={<AdminBookingPage />} />
-            <Route path="/booking" element={<AdminBookingPage />} />
-            <Route path="/home" element={<HomePage />} />
-          </Routes>
-        </header>
-      </div>
-    </Router>
+    // <Router>
+    //   <div className="App">
+    //     <header className="App-header">
+    //       <Routes>
+    //         <Route path="/" element={<HomePage />} />
+    //         <Route path="/auth" element={<AuthPage />} />
+    //         <Route path="/contact" element={<ContactUsPage />} />
+    //         <Route path="/a_booking" element={<AdminBookingPage />} />
+    //         <Route path="/booking" element={<AdminBookingPage />} />
+    //         <Route path="/home" element={<HomePage />} />
+    //       </Routes>
+    //     </header>
+    //   </div>
+    // </Router>
+
+    <>
+      <AuthPage />
+    </>
   );
 }
 
