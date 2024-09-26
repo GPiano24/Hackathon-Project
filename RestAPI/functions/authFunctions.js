@@ -8,6 +8,9 @@ export const getUserByUsername = (username, callback) => {
     if (err) return callback(err, null);
     if (results.length === 0) return callback(null, null);
 
+   // console.log("This is from getUserByUsername function");
+   // console.log(results[0]);
+
     return callback(null, results[0]);
   });
 };
