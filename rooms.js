@@ -1,4 +1,4 @@
-const data = {
+module.exports = {
     rooms: [
         {
             id: 1,
@@ -32,5 +32,3 @@ const data = {
         }
     ]
 }
-
-export default data;
