@@ -11,8 +11,9 @@ export function authRoutes(app) {
       if (err) return res.status(500).json({ message: "Database error" });
       if (!user)
         return res.status(403).json({ message: "Invalid credentials" });
-
-      const validPassword = bcrypt.compareSync(password, user.password);
+      
+      const hashedPassword = bcrypt.hashSync(user.password, 10);
+      const validPassword = bcrypt.compareSync(password, hashedPassword);
       console.log(validPassword);
       if (!validPassword) {
         console.log(password, user.password);
