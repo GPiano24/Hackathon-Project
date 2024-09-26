@@ -16,3 +16,5 @@ const Query = {
         return data;
     },
 }
+
+module.exports = {Query};
