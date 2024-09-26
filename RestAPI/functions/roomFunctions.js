@@ -15,7 +15,7 @@ export async function getRooms(capacity) {
             }
         
             if(!rooms || rooms.length == 0) {
-                throw new Error("Error retrieving rooms!");
+                reject(new Error("Error retrieving rooms!"));
             } 
             resolve(rooms)
         });
@@ -31,7 +31,7 @@ export async function getRoom(roomId) {
             const room = await result;
     
             if (!room) {
-                throw new Error("Room not found");
+                reject(new Error("Room not found"));
             }
             else {
                 resolve(room[0]);
