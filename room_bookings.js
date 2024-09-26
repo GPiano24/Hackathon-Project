@@ -1,4 +1,4 @@
-const data2 = {
+module.exports = {
     bookings: [
         {
             "booking_id": "AR7EKD",
@@ -102,5 +102,3 @@ const data2 = {
         }
     ]
 }
-
-export default data2;
