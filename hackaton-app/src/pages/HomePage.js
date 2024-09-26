@@ -2,7 +2,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div className="relative bg-gradient-to-r from-purple-600 to-blue-600 h-screen text-white overflow-hidden">
+    <div className="relative  h-screen text-white overflow-hidden">
       <div className="absolute inset-0">
         <img
           src={require("../assets/manulife.png")}
@@ -14,10 +14,10 @@ const Home = () => {
 
       <div className="relative z-10 flex flex-col justify-center items-center h-full text-center">
         <h1 className="text-5xl font-bold leading-tight mb-4">
-          Welcome to Our Awesome Website
+          Welcome to Manulife University!
         </h1>
         <p className="text-lg text-gray-300 mb-8">
-          Discover amazing features and services that await you.
+          Discover amazing coaches and improve your skills.
         </p>
         <a
           href="#"

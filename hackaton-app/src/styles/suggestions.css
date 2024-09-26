@@ -1,0 +1,37 @@
+.slider {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 200px;
+    position: relative;
+  }
+  
+  .card {
+    min-width: 300px; 
+    margin: 0 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .slider-content {
+    display: flex;
+    animation: marquee 20s linear infinite; /* Increased duration to 20s */
+  }
+  
+  .slider-content:hover {
+    animation-play-state: paused;
+  }

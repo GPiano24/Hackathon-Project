@@ -1,23 +1,49 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
-import HomePage from "./pages/HomePage";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
+import NavBar from "./components/Navbar";
+import BookingDisplay from "./pages/BookingDisplay";
+import BookingPage from "./pages/BookingPage";
 import AuthPage from "./pages/AuthPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import AdminBookingPage from "./pages/AdminBookingPage";
+import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
-import NavBar from "./components/Navbar";
-import ProtectedRoute from "./components/ProtectedRoute";
+import { FaMessage } from "react-icons/fa6";
+import { ProtectedRoute, PublicRoute } from "./routes";
+
+const BubbleButton = () => {
+  const navigate = useNavigate();
+
+  return (
+    <button
+      onClick={() => navigate("/contact-us")}
+      className="fixed bottom-4 right-4 bg-green-700 text-white p-4 rounded-full shadow-lg hover:bg-green-900 transition-colors"
+    >
+      <FaMessage />
+    </button>
+  );
+};
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <NavBar />
+      <div className="flex flex-col min-h-screen relative">
+        <NavBar />
+        <div className="flex-grow">
           <Routes>
-            <Route path="/" element={<AuthPage />} />
-            <Route path="/contact" element={<ContactUsPage />} />
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <AuthPage />
+                </PublicRoute>
+              }
+            />
             <Route
               path="/a_booking"
               element={
@@ -30,7 +56,7 @@ function App() {
               path="/booking"
               element={
                 <ProtectedRoute>
-                  <AdminBookingPage />
+                  <BookingPage />
                 </ProtectedRoute>
               }
             />
@@ -42,9 +68,26 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/booking-display"
+              element={
+                <ProtectedRoute>
+                  <BookingDisplay />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/contact-us"
+              element={
+                <ProtectedRoute>
+                  <ContactUsPage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
-          <Footer />
-        </header>
+        </div>
+        <Footer />
+        <BubbleButton />
       </div>
     </Router>
   );
