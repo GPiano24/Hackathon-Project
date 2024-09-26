@@ -40,3 +40,35 @@ export async function getRoom(roomId) {
 
     }, "")
 };
+
+
+export async function getAvailableRooms(roomIds) {
+    let roomIdsQuery = "(";
+
+    for(let i = 0; i < roomIds.length; i++) {
+        roomIdsQuery += "'" + roomIds[i] + "'";
+        if(i+1 < roomIds.length) {
+            roomIdsQuery += ","
+        }
+    }
+
+    roomIdsQuery += ")";
+    console.log("ROOM IDS QUERY " + roomIdsQuery)
+
+    const SELECT_QUERY = `select ROOM_ID, ROOM_NAME, CAPACITY from ROOMS where ROOM_ID not in ${roomIdsQuery}`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(SELECT_QUERY, async (err, result) => {
+            if (err) throw err;
+            const rooms = await result;
+    
+            if (!rooms) {
+                reject({getAvailableRoomsMessage: "No available rooms for given schedule"});
+            }
+            else {
+                resolve(rooms);
+            }
+        });
+
+    }, "")
+};
