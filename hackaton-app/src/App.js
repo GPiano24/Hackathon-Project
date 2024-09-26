@@ -13,13 +13,14 @@ import ContactUsPage from "./pages/ContactUsPage";
 import AdminBookingPage from "./pages/AdminBookingPage";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
+import { AuthProvider } from "./context/AuthContext";
 import { FaMessage } from "react-icons/fa6";
 const BubbleButton = () => {
   const navigate = useNavigate();
 
   return (
     <button
-      onClick={() => navigate("/contact-us")}
+      onClick={() => navigate("/contact")}
       className="fixed bottom-4 right-4 bg-green-700 text-white p-4 rounded-full shadow-lg hover:bg-green-900 transition-colors"
     >
       <FaMessage />
@@ -29,24 +30,26 @@ const BubbleButton = () => {
 
 function App() {
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen relative">
-        <NavBar />
-        <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<AuthPage />} />
-            <Route path="/contact" element={<ContactUsPage />} />
-            <Route path="/a_booking" element={<AdminBookingPage />} />
-            <Route path="/booking" element={<BookingPage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/booking-display" element={<BookingDisplay />} />
-            <Route path="/contact-us" element={<ContactUsPage />} />
-          </Routes>
+    <AuthProvider>
+      <Router>
+        <div className="flex flex-col min-h-screen relative">
+          <NavBar />
+          <div className="flex-grow">
+            <Routes>
+              <Route path="/" element={<AuthPage />} />
+              <Route path="/login" element={<AuthPage />} />{" "}
+              <Route path="/contact" element={<ContactUsPage />} />
+              <Route path="/a_booking" element={<AdminBookingPage />} />
+              <Route path="/booking" element={<BookingPage />} />
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/booking-display" element={<BookingDisplay />} />
+            </Routes>
+          </div>
+          <Footer />
+          <BubbleButton />
         </div>
-        <Footer />
-        <BubbleButton />
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 

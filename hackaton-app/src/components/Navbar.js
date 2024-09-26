@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,11 +13,13 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { FaBars } from "react-icons/fa";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -29,6 +31,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     handleMenuClose();
+    logout();
     navigate("/");
   };
 
@@ -58,6 +61,11 @@ const Navbar = () => {
         <ListItem button component={Link} to="/booking-display">
           <ListItemText primary="Bookings" />
         </ListItem>
+        {user && user.role === "admin" && (
+          <ListItem button component={Link} to="/a_booking">
+            <ListItemText primary="Admin Booking" />
+          </ListItem>
+        )}
         <ListItem button component={Link} to="/profile">
           <ListItemText primary="Profile" />
         </ListItem>
@@ -91,9 +99,20 @@ const Navbar = () => {
           <Button color="inherit" component={Link} to="/booking-display">
             Bookings
           </Button>
-          <Button color="inherit" onClick={handleProfileMenuOpen}>
-            Profile
-          </Button>
+          {user && user.role === "admin" && (
+            <Button color="inherit" component={Link} to="/a_booking">
+              Admin Booking
+            </Button>
+          )}
+          {user ? (
+            <Button color="inherit" onClick={handleProfileMenuOpen}>
+              Profile
+            </Button>
+          ) : (
+            <Button color="inherit" component={Link} to="/login">
+              Login
+            </Button>
+          )}
         </Box>
 
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -124,7 +143,6 @@ const Navbar = () => {
         <MenuItem component={Link} to="/profile" onClick={handleMenuClose}>
           Profile
         </MenuItem>
-        <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>

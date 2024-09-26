@@ -1,76 +1,37 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import background from "../assets/bg-mu.png";
+import { AuthContext } from "../context/AuthContext";
 
 const AuthPage = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
-  const onButtonClick = () => {
+  const onButtonClick = async () => {
     setError("");
 
-    if (username === "" || password === "") {
+    if (email === "" || password === "") {
       setError("Missing Fields");
       return;
     }
 
-    //Authentication calls here
-    //Successful login
-    navigate("/home");
+    const success = await login(email, password);
+    if (success) {
+      navigate("/home");
+    } else {
+      setError("Invalid credentials");
+    }
   };
 
   const handleInputChange = (setter) => (event) => {
     setter(event.target.value);
-    setError(""); // Clears the error
+    setError("");
   };
-
-  // return (
-  //   <div className={"main-container"}>
-  //     <div className={"inner-container"}>
-  //       <img src={logo} alt="Manulife Logo"/>
-
-  //       <br/>
-
-  //       <div className={'input-container'}>
-  //         <p>Username</p>
-  //         <input
-  //             value={username}
-  //             onChange={(ev) => setUsername(ev.target.value)}
-  //             className={'inputBox'}
-  //         />
-  //       </div>
-
-  //       <br/>
-
-  //       <div className={'input-container'}>
-  //         <p>Password</p>
-  //         <input
-  //             value={password}
-  //             onChange={(ev) => setPassword(ev.target.value)}
-  //             className={'inputBox'}
-  //         />
-  //       </div>
-
-  //       <br/>
-
-  //       <div>
-  //         <label className={"errorLabel"}>{error}</label>
-  //       </div>
-
-  //       <br/>
-
-  //       <div className={'button-container'}>
-  //         <input className={'inputButton'} type="button" onClick={onButtonClick} value={'LOGIN'} />
-  //       </div>
-
-  //     </div>
-  //   </div>
-  // );
 
   return (
     <div className="relative flex flex-col items-center justify-center h-screen">
@@ -83,10 +44,10 @@ const AuthPage = () => {
         <img src={logo} alt="Manulife Logo" className="mb-6" />
 
         <div className="w-2/3 flex flex-col items-start justify-center mb-4">
-          <p className="text-base">Username</p>
+          <p className="text-base">Email</p>
           <input
-            value={username}
-            onChange={handleInputChange(setUsername)}
+            value={email}
+            onChange={handleInputChange(setEmail)}
             className="h-12 w-full text-base rounded-md border border-black pl-2"
           />
         </div>
