@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import { setupRoomRoutes } from "./setupRoomRoutes.js";
+import { setupUserRoutes } from "./setupUserRoutes.js";
 import { authRoutes } from "./authRoutes.js";
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 
 // ROUTES
 setupRoomRoutes(app);
+setupUserRoutes(app);
 authRoutes(app);
 
 app.listen(PORT, () => {
