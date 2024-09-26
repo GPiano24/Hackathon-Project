@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/rooms", (req, res) => {
-    const c = req.query.capacity;
+    const c = parseInt(req.query.capacity);
     
     let rooms = data.rooms;
 
