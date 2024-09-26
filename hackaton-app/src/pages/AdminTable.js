@@ -7,7 +7,8 @@ const AdminTable = () => {
   const [data, setData] = useState([
     {
       date: "2023-10-01",
-      time: "10:00 AM",
+      startTime: "10:00 AM",
+      endTime: "11:00 AM",
       room: "A101",
       capacity: 50,
       status: "pending",
@@ -15,7 +16,8 @@ const AdminTable = () => {
     },
     {
       date: "2023-10-02",
-      time: "11:00 AM",
+      startTime: "11:00 AM",
+      endTime: "12:00 PM",
       room: "B202",
       capacity: 30,
       status: "approved",
@@ -23,7 +25,8 @@ const AdminTable = () => {
     },
     {
       date: "2023-10-03",
-      time: "12:00 PM",
+      startTime: "12:00 PM",
+      endTime: "01:00 PM",
       room: "C303",
       capacity: 20,
       status: "declined",
@@ -37,10 +40,16 @@ const AdminTable = () => {
     setData(updatedData);
   };
 
+  const handleDelete = (index) => {
+    const updatedData = data.filter((_, i) => i !== index);
+    setData(updatedData);
+  };
+
   const filteredData = data.filter(
     (item) =>
       (item.date.includes(filter) ||
-        item.time.includes(filter) ||
+        item.startTime.includes(filter) ||
+        item.endTime.includes(filter) ||
         item.room.includes(filter) ||
         item.capacity.toString().includes(filter) ||
         item.notes.includes(filter)) &&
@@ -72,7 +81,8 @@ const AdminTable = () => {
         <thead>
           <tr>
             <th className="py-2 px-4 border-b">Date</th>
-            <th className="py-2 px-4 border-b">Time</th>
+            <th className="py-2 px-4 border-b">Start Time</th>
+            <th className="py-2 px-4 border-b">End Time</th>
             <th className="py-2 px-4 border-b">Room</th>
             <th className="py-2 px-4 border-b">Room Capacity</th>
             <th className="py-2 px-4 border-b">Status</th>
@@ -83,11 +93,16 @@ const AdminTable = () => {
         <tbody>
           {filteredData.map((item, index) => (
             <tr key={index} className="hover:bg-gray-100">
-              <td className="py-2 px-4 border-b">{item.date}</td>
-              <td className="py-2 px-4 border-b">{item.time}</td>
-              <td className="py-2 px-4 border-b">{item.room}</td>
-              <td className="py-2 px-4 border-b">{item.capacity}</td>
-              <td className="py-2 px-4 border-b">
+              <td className="py-2 px-4 border-b text-center">{item.date}</td>
+              <td className="py-2 px-4 border-b text-center">
+                {item.startTime}
+              </td>
+              <td className="py-2 px-4 border-b text-center">{item.endTime}</td>
+              <td className="py-2 px-4 border-b text-center">{item.room}</td>
+              <td className="py-2 px-4 border-b text-center">
+                {item.capacity}
+              </td>
+              <td className="py-2 px-4 border-b text-center">
                 {editMode === index ? (
                   <select
                     value={item.status}
@@ -112,8 +127,8 @@ const AdminTable = () => {
                   </span>
                 )}
               </td>
-              <td className="py-2 px-4 border-b">{item.notes}</td>
-              <td className="py-2 px-4 border-b">
+              <td className="py-2 px-4 border-b text-center">{item.notes}</td>
+              <td className="py-2 px-4 border-b text-center">
                 {editMode === index ? (
                   <button
                     onClick={() => setEditMode(null)}
@@ -124,11 +139,17 @@ const AdminTable = () => {
                 ) : (
                   <button
                     onClick={() => setEditMode(index)}
-                    className="p-2 bg-gray-500 text-white rounded"
+                    className="p-2 bg-gray-500 text-white rounded mr-2"
                   >
                     Edit
                   </button>
                 )}
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="p-2 bg-red-500 text-white rounded"
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
