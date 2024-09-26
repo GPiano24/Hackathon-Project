@@ -6,9 +6,11 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -19,6 +21,12 @@ const Navbar = () => {
   };
 
   const isMenuOpen = Boolean(anchorEl);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+    handleMenuClose();
+  };
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
@@ -58,7 +66,7 @@ const Navbar = () => {
       >
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
         <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </AppBar>
   );

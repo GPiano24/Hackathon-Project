@@ -7,6 +7,8 @@ import ContactUsPage from "./pages/ContactUsPage";
 import AdminBookingPage from "./pages/AdminBookingPage";
 import Footer from "./components/Footer";
 import NavBar from "./components/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 function App() {
   return (
     <Router>
@@ -16,9 +18,30 @@ function App() {
           <Routes>
             <Route path="/" element={<AuthPage />} />
             <Route path="/contact" element={<ContactUsPage />} />
-            <Route path="/a_booking" element={<AdminBookingPage />} />
-            <Route path="/booking" element={<AdminBookingPage />} />
-            <Route path="/home" element={<HomePage />} />
+            <Route
+              path="/a_booking"
+              element={
+                <ProtectedRoute adminOnly={true}>
+                  <AdminBookingPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/booking"
+              element={
+                <ProtectedRoute>
+                  <AdminBookingPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <HomePage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           <Footer />
         </header>
