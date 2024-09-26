@@ -1,7 +1,7 @@
-import express from "express";
-import cors from "cors";
-import data from "../rooms.js";
-import data2 from "../room_bookings.js";
+const express =  require("express");
+const cors = require("cors");
+const data =  require("../rooms.js");
+const data2 = require("../room_bookings.js");
 // const fetchData = require("./fetchTest");
 // const fetchTest = require("./fetchTest");
 
