@@ -35,15 +35,15 @@ const typeDefs = gql`
     }
     
     type Booking{
-        booking_id: ID
-        user_id: String
-        room_id: String
-        approved_ind: String
-        booking_reason: String
-        date_booked: String
-        from_booking: String
-        to_booking: String
-        remarks: String
+        BOOKING_ID: ID
+        USER_ID: String
+        ROOM_ID: String
+        APPROVED_IND: String
+        BOOKING_REASON: String
+        DATE_BOOKED: String
+        FROM_BOOKING: String
+        TO_BOOKING: String
+        REMARKS: String
     }
 `
 
