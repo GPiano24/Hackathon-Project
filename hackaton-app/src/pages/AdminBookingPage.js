@@ -82,6 +82,98 @@ const AdminBookingPage = () => {
           >
             John Doe
           </Typography>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ fontWeight: "bold", marginBottom: 1, textAlign: "left" }}
+          >
+            ID:
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ marginBottom: 2, textAlign: "left" }}
+          >
+            202103452
+          </Typography>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ fontWeight: "bold", marginBottom: 1, textAlign: "left" }}
+          >
+            Date:
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ marginBottom: 2, textAlign: "left" }}
+          >
+            26-09-2024
+          </Typography>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ fontWeight: "bold", marginBottom: 1, textAlign: "left" }}
+          >
+            Time:
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ marginBottom: 2, textAlign: "left" }}
+          >
+            11:18 am - 12:00 pm
+          </Typography>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ fontWeight: "bold", marginBottom: 1, textAlign: "left" }}
+          >
+            I'm a:
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ marginBottom: 2, textAlign: "left" }}
+          >
+            Student
+          </Typography>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ fontWeight: "bold", marginBottom: 1, textAlign: "left" }}
+          >
+            Room:
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ marginBottom: 2, textAlign: "left" }}
+          >
+            Cagayan De Oro
+          </Typography>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ fontWeight: "bold", marginBottom: 1, textAlign: "left" }}
+          >
+            Description:
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ textAlign: "left" }}
+          >
+            Lorem ipsum odor amet, consectetuer adipiscing elit. Nunc a iaculis
+            vivamus elit curae maecenas mauris maximus dictumst. Tempor
+            convallis nisl auctor diam fermentum pharetra per ad lacus.
+          </Typography>
         </CardContent>
       </Card>
 
