@@ -4,7 +4,7 @@ import { getRoom, getAvailableRooms }  from '../functions/roomFunctions.js';
 
 
 export async function getBookings(status, fromDate, toDate) {
-    const SELECT_QUERY = "select BOOKING_ID, USER_ID, ROOM_ID, STATUS, BOOKING_REASON, DATE_BOOKED, FROM_BOOKING, TO_BOOKING, REMARKS from ROOM_BOOKINGS";
+    const SELECT_QUERY = "select BOOKING_ID, USER_ID, ROOM_ID, APPROVED_IND, BOOKING_REASON, DATE_BOOKED, FROM_BOOKING, TO_BOOKING, REMARKS from ROOM_BOOKINGS";
 
     let bookings = [];
 
@@ -17,9 +17,20 @@ export async function getBookings(status, fromDate, toDate) {
                 bookings = bookings.filter(booking => booking.STATUS.toUpperCase() === status.toUpperCase());
             }
 
+            function formatDateTime(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                const seconds = String(date.getSeconds()).padStart(2, '0');
+
+                return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            }
+
             if(fromDate && toDate) {
-                const formattedFromDate = (new Date(fromDate)).toString();
-                const formattedToDate = (new Date(toDate)).toString();
+                const formattedFromDate = formatDateTime((new Date(fromDate)).toString());
+                const formattedToDate = formatDateTime((new Date(toDate)).toString());
 
                 bookings = bookings.filter(booking => (new Date(booking.FROM_BOOKING)).toString() === formattedFromDate &&
                     (new Date(booking.TO_BOOKING)).toString() === formattedToDate
@@ -212,7 +223,7 @@ export async function updateBooking(bookingId, status, remarks) {
     return new Promise((resolve, reject) => {
         connection.query(UPDATE_QUERY, async (err, result) => {
             if (err) throw err;
-            const result = await result;
+            result = await result;
             if (!result) {
                 reject(new Error("Booking update failed!"))
             }
