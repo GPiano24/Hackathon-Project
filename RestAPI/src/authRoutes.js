@@ -11,7 +11,7 @@ export function authRoutes(app) {
       if (err) return res.status(500).json({ message: "Database error" });
       if (!user)
         return res.status(403).json({ message: "Invalid credentials" });
-      
+
       const hashedPassword = bcrypt.hashSync(user.password, 10);
       const validPassword = bcrypt.compareSync(password, hashedPassword);
       if (!validPassword) {
@@ -34,6 +34,7 @@ export function authRoutes(app) {
   });
 
   app.get("/a_booking", authenticateJWT, checkAdminRole, (req, res) => {
+    console.log("Accessing /a_booking");
     res.json({ message: "Admin page accessed" });
   });
 }

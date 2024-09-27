@@ -18,7 +18,7 @@ const AdminBookingPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await fetchWithAuth("http://localhost:4000/admin", {
+        const result = await fetchWithAuth("http://localhost:4000/a_booking", {
           method: "GET",
         });
         setData(result);

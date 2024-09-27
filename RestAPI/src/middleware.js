@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { getUserRole } from "../functions/authFunctions.js";
 const SECRET_KEY = "a-very-secret-key";
 
 export const authenticateJWT = (req, res, next) => {
