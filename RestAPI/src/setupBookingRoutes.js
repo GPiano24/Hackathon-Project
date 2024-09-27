@@ -82,23 +82,19 @@ export function setupBookingRoutes(app) {
   app.get("/available-rooms", async (req, res) => {
     try {
       const declinedBookings = await getBookings("declined", null, null);
-      console.log("declined bookings", declinedBookings);
       if (!declinedBookings || declinedBookings.length === 0) {
         return res.status(200).json([]);
       }
 
       const roomIds = declinedBookings.map((booking) => booking.ROOM_ID);
-      console.log("room ids", roomIds);
       const availableRooms = await getAvailableRooms(roomIds);
 
       if (!availableRooms || availableRooms.length === 0) {
         return res.status(200).json([]);
       }
-      console.log("available rooms", availableRooms);
       res.json(availableRooms);
     } catch (error) {
-      console.log("error");
-      res.status(400).json({ error: error.message });
+      res.status(200).json([]);
     }
   });
 }
