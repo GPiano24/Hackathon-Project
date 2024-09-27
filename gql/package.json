@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "apollo-server": "^3.13.0",
+    "gql": "file:",
     "graphql": "^16.9.0",
     "jest": "^29.7.0",
     "node-fetch": "^2.6.7"
