@@ -1,6 +1,4 @@
-import { getBookings, getBooking, getEarliestAvailableSchedule, getBookedRoomsPerSched, bookARoom}  from '../functions/bookingFunctions.js';
-import { getUserRole }  from '../functions/userRoleFunctions.js';
-import { getRoom, getAvailableRooms }  from '../functions/roomFunctions.js';
+import { getBookings, getBooking, getEarliestAvailableSchedule, getBookedRoomsPerSched, bookARoom, updateBooking}  from '../functions/bookingFunctions.js';
 
 const API_URL = 'http://localhost:4000';
 
@@ -45,4 +43,20 @@ export function setupBookingRoutes (app) {
             res.status(400).json({error: error.message});
         }  
 
-    })};
+    });
+
+
+    app.patch('/bookings', async (req, res) => {
+        try {
+            const { bookingId, status, remarks } = req.body;
+            const result = await updateBooking(bookingId, status, remarks);
+
+            res.json(result);
+        } catch(error) {
+            res.status(400).json({error: error.message});
+        }  
+
+    });
+
+
+};

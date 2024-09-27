@@ -195,3 +195,32 @@ export async function bookARoom(user_id, room_id, from_booking, to_booking, stat
         }
     }, "")
 };
+
+export async function updateBooking(bookingId, status, remarks) {
+    let UPDATE_QUERY = "";
+
+    if(status && remarks) {
+        UPDATE_QUERY = `UPDATE ROOM_BOOKINGS SET STATUS = '${status}', REMARKS = '${remarks}' WHERE BOOKING_ID='${bookingId}`;
+    }
+    else if(status) {
+        UPDATE_QUERY = `UPDATE ROOM_BOOKINGS SET STATUS = '${status}' WHERE BOOKING_ID='${bookingId}`;
+    }
+    else if(remarks) {
+        UPDATE_QUERY = `UPDATE ROOM_BOOKINGS SET REMARKS = '${remarks}' WHERE BOOKING_ID='${bookingId}`;
+    }
+
+    return new Promise((resolve, reject) => {
+        connection.query(UPDATE_QUERY, async (err, result) => {
+            if (err) throw err;
+            const result = await result;
+            if (!result) {
+                reject(new Error("Booking update failed!"))
+            }
+            else {
+                const booking = await getBooking(bookingId);
+                resolve(booking);
+            }
+        });
+
+    }, "")
+};
