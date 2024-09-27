@@ -41,7 +41,7 @@ CREATE TABLE ROOM_BOOKINGS (
 	booking_id CHAR(6) NOT NULL,
 	user_id CHAR(6) NOT NULL,
     room_id CHAR(4) NOT NULL,
-    approved_ind CHAR(1) NOT NULL,
+    status VARCHAR(10) NOT NULL,
     booking_reason VARCHAR(200) NOT NULL,
     date_booked DATETIME NOT NULL,
     from_booking DATETIME NOT NULL,
