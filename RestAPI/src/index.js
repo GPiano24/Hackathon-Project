@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 
 import { setupRoomRoutes } from "./setupRoomRoutes.js";
+import { setupUserRoutes } from "./setupUserRoutes.js";
+import { authRoutes } from "./authRoutes.js";
 import { setupBookingRoutes } from "./setupBookingRoutes.js";
 
 const app = express();
@@ -12,8 +14,10 @@ app.use(cors());
 
 // ROUTES
 setupRoomRoutes(app);
+setupUserRoutes(app);
+authRoutes(app);
 setupBookingRoutes(app);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
