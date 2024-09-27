@@ -1,0 +1,26 @@
+{
+  "name": "restapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@babel/core": "^7.25.2",
+    "@types/jest": "^29.5.13",
+    "babel-jest": "^29.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "esm": "^3.2.25",
+    "express": "^4.21.0",
+    "jest": "^29.7.0",
+    "mysql2": "^3.11.3",
+    "nodemon": "^2.0.12"
+  }
+}
