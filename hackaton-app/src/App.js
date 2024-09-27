@@ -15,6 +15,7 @@ import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import { FaMessage } from "react-icons/fa6";
 import { ProtectedRoute, PublicRoute } from "./routes";
+import AdminTable from "./pages/AdminTable";
 
 const BubbleButton = () => {
   const navigate = useNavigate();
@@ -81,6 +82,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ContactUsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/a_table"
+              element={
+                <ProtectedRoute>
+                  <AdminTable />
                 </ProtectedRoute>
               }
             />
