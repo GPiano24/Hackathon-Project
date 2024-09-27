@@ -26,9 +26,37 @@ const BookingPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const postBody = {
+    ...formData,
+    user_id: 510645,
+    room_id:'R001',
+    CAPACITY: 10,
+    from_booking: `${formData.date} ${formData.fromTime}:00`,
+    to_booking: `${formData.date} ${formData.toTime}:00`,
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    console.log("Form submitted:", postBody);
+    const response = fetch("http://localhost:4000/bookings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postBody),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Success:", data);
+        setFormData({
+          name: "",
+          room: "",
+          date: "",
+          fromTime: "",
+          toTime: "",
+          description: "",
+        });
+    })
   };
 
   const handleCancel = () => {

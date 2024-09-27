@@ -1,8 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {useQuery, gql} from "@apollo/client";
+
+const GET_BOOKINGS = gql`
+  query Bookings {
+    bookings {
+      BOOKING_ID
+      USER_ID
+      ROOM_ID
+      STATUS
+      BOOKING_REASON
+      DATE_BOOKED
+      FROM_BOOKING
+      TO_BOOKING
+      REMARKS
+    }
+  }
+`
 
 //a_table
 const AdminTable = () => {
+  const { loading, error, data: data3 } = useQuery(GET_BOOKINGS);
   const [filter, setFilter] = useState("");
+  const [data2, setData2] = useState([]);
   const [statusFilter, setStatusFilter] = useState("");
   const [editMode, setEditMode] = useState(null);
   const [data, setData] = useState([
@@ -35,26 +54,33 @@ const AdminTable = () => {
     },
   ]);
 
+  useEffect(()=> {
+    if(data3){
+      setData2(data3.bookings);
+      console.log(data3.bookings);
+    }
+  }, [data2])
+
   const handleStatusChange = (index, newStatus) => {
-    const updatedData = [...data];
+    const updatedData = [...data2];
     updatedData[index].status = newStatus;
     setData(updatedData);
   };
 
   const handleDelete = (index) => {
-    const updatedData = data.filter((_, i) => i !== index);
+    const updatedData = data2.filter((_, i) => i !== index);
     setData(updatedData);
   };
 
-  const filteredData = data.filter(
+  const filteredData = data2.filter(
     (item) =>
-      (item.date.includes(filter) ||
-        item.startTime.includes(filter) ||
-        item.endTime.includes(filter) ||
-        item.room.includes(filter) ||
-        item.capacity.toString().includes(filter) ||
-        item.notes.includes(filter)) &&
-      (statusFilter === "" || item.status === statusFilter)
+      (item.DATE_BOOKED.includes(filter) ||
+        item.FROM_BOOKING.includes(filter) ||
+        item.TO_BOOKING.includes(filter) ||
+        item.ROOM_ID.includes(filter) ||
+        item.CAPACITY.toString().includes(filter) ||
+        item.REMARKS.includes(filter)) &&
+      (statusFilter === "" || item.STATUS === statusFilter)
   );
 
   return (
@@ -92,21 +118,21 @@ const AdminTable = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((item, index) => (
+          {data2.map((item, index) => (
             <tr key={index} className="hover:bg-gray-100">
-              <td className="py-2 px-4 border-b text-center">{item.date}</td>
+              <td className="py-2 px-4 border-b text-center">{item.DATE_BOOKED}</td>
               <td className="py-2 px-4 border-b text-center">
-                {item.startTime}
+                {item.FROM_BOOKING}
               </td>
-              <td className="py-2 px-4 border-b text-center">{item.endTime}</td>
-              <td className="py-2 px-4 border-b text-center">{item.room}</td>
+              <td className="py-2 px-4 border-b text-center">{item.TO_BOOKING}</td>
+              <td className="py-2 px-4 border-b text-center">{item.ROOM_ID}</td>
               <td className="py-2 px-4 border-b text-center">
-                {item.capacity}
+                {20}
               </td>
               <td className="py-2 px-4 border-b text-center">
                 {editMode === index ? (
                   <select
-                    value={item.status}
+                    value={item.STATUS}
                     onChange={(e) => handleStatusChange(index, e.target.value)}
                     className="p-2 border rounded"
                   >
